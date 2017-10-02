@@ -6,18 +6,18 @@
   <div class="panel-body">
     <div class="row">
       <div class="col-md-2">Filter by</div>
-      <!-- <div class="col-md-4">
-        <input type="text" [(ngModel)]='listFilter' />
-      </div> -->
-    </div>
-    <!-- <div class="row">
-      <div class="col-md-6">
-        <h2>Filtered by:{{listFilter}}</h2>
+      <div ng-app="type">
+        <div ng-controller="TypeCtrl">
+          <input type="checkbox" ng-click="type('Mens')">Mens
+          <input type="checkbox" ng-model="type('Womens')">Womens
+          <input type="checkbox" ng-model="type('Kids')">Kids
+        </div>
       </div>
-    </div> -->
+    </div>
+
     <div class="table-responsive">
       <table class="table">
-          <!-- *ngIf='bikes && bikes.length' -->
+        <!-- *ngIf='bikes && bikes.length' -->
         <thead>
           <tr>
             <th>
@@ -37,8 +37,8 @@
         </thead>
         <tbody>
           <tr *ngFor='let bike of filteredBikes'>
-            <td><img *ngIf='showImage' [src]='bike.imageUrl' [title]='bike.bikeName'
-               [style.width.px]='imageWidth' [style.margin.px]='imageMargin'
+            <tr ng-repeat="bike in filteredBikes | filter:typeFilter">
+            <td><img *ngIf='showImage' [src]='bike.imageUrl' [title]='bike.bikeName' [style.width.px]='imageWidth' [style.margin.px]='imageMargin'
               />
             </td>
             <td>{{bike.bikeName}}</td>
