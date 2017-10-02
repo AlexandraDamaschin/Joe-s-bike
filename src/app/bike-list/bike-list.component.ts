@@ -187,9 +187,9 @@ export class BikeListComponent implements OnInit {
         $bike.includeName = function (name) {
             var i = $bike.inArray(name, $bike.bikeIncludes);
             if (i > -1) {
-                $bike.colourIncludes.splice(i, 1);
+                $bike.bikeIncludes.splice(i, 1);
             } else {
-                $bike.colourIncludes.push(name);
+                $bike.bikeIncludes.push(name);
             }
         }
 
