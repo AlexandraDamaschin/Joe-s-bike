@@ -1,3 +1,4 @@
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <div class="panel panel primary">
   <div class="panel-heading">
     {{pageTitle}}
@@ -7,23 +8,31 @@
     <div class="row">
       <div class="col-md-2">Filter by</div>
       <div ng-app="type">
-        <div ng-controller="TypeCtrl">
-          <input type="checkbox" ng-click="type('Mens')">Mens
+        <div class="checkbox">
+          <input type="checkbox" ng-model="type('Mens')">Mens
           <input type="checkbox" ng-model="type('Womens')">Womens
           <input type="checkbox" ng-model="type('Kids')">Kids
         </div>
       </div>
-    </div>
+      <!-- <div  ng-controller="angularController as ctrl">
+        <div class="sidebar" layout-padding>
+          <div ng-repeat="bikes in filteredBikes">
+            <h3 class="sort">{{bike.category}}</h3>
+              <div ng-repeat="option in filter.options">
+                <input type="checkbox" ng-model="type.mens" ng-checked="type.mens">Mens
+                <input type="checkbox" ng-model="type.womens" ng-checked="type.womens"> Womens
+                <input type="checkbox" ng-model="type.kids" ng-checked="type.kids"> Kids
+              </div>
+          </div>
+    </div> -->
 
     <div class="table-responsive">
-      <table class="table">
-        <!-- *ngIf='bikes && bikes.length' -->
+      <table class="table table-hover" *ngIf="filteredBikes && filteredBikes.length">
         <thead>
           <tr>
             <th>
               <button class="btn btn-primary" (click)='toggleImage()'>
         {{showImage ?'Hide':'Show'}} Image
-
       </button>
             </th>
             <th>Bikes</th>
@@ -37,7 +46,7 @@
         </thead>
         <tbody>
           <tr *ngFor='let bike of filteredBikes'>
-            <tr ng-repeat="bike in filteredBikes | filter:typeFilter">
+            <!-- <tr ng-repeat="bike in filteredBikes | filter:typeFilter"> -->
             <td><img *ngIf='showImage' [src]='bike.imageUrl' [title]='bike.bikeName' [style.width.px]='imageWidth' [style.margin.px]='imageMargin'
               />
             </td>
@@ -46,7 +55,7 @@
             <td>{{bike.relaseDate}}</td>
             <td>{{bike.description}}</td>
             <td>{{bike.category}}</td>
-            <td>{{bike.price }}</td>
+            <td>{{bike.price | currency:'EUR':true:'1.2-2'}}</td>
             <td>{{bike.starRating}}</td>
           </tr>
         </tbody>
