@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IBike } from '../bike';
-import * as _ from 'lodash';
-// import { $ } from 'protractor';
-// angular.module('bike', []);
+import { IBike } from './bike';
 
 @Component({
     selector: 'app-bike-list',
@@ -127,49 +124,10 @@ export class BikeListComponent implements OnInit {
     changeBoxKids(type: string):void{
         this.filteredBikes= this.showKids ? this.filter(type): this.bikes;
     }
-    // performFilter(type: string, flag: boolean) {
-    //     if (type=='mens') {
-    //         this.bikes.forEach((bike: IBike) => {
-    //             if (bike.category.toLowerCase() == type.toLowerCase())
-    //                 this.filteredBikes.push(bike);
-    //         });
-    //     }
-    //     else {
-    //         this.filteredBikes = _.filter(this.filteredBikes, (bike: IBike) => {
-    //             return bike.category.toLowerCase() != type.toLowerCase();
-    //         });
-    //     }
-    // }
     filter(filterBy:string):IBike[] {
-        // this.filteredBikes = _.filter(this.filteredBikes, (bike: IBike) => {
-        //     if(this._showMens && bike.category.toLowerCase() != 'mens'){
-        //         return false;
-        //     }
-        //      if(this._showWomens && bike.category.toLowerCase() != 'womens'){
-        //         return false;
-        //     }
-        //     if(this._showKids && bike.category.toLowerCase() != 'kids'){
-        //         return false;
-        //     }
-        //     return true;
-        // =======================================================================
         return this.bikes.filter((bikes: IBike) =>
         bikes.category.toLocaleLowerCase().indexOf(filterBy) != -1);
-
-    // });
 }
-
-    // filterBikes(bike: string) {
-    //     if (bike.category == 'mens') {
-    //         return this._showMens;
-    //     }
-    //     else if (type =='womens') {
-    //         return this._showWomens;
-    //     }
-    //     else  ( type=='kids'){
-    //         return this._showKids;
-    //     }
-    // }
     ngOnInit(): void {
     }
 }
