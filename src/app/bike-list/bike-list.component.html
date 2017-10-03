@@ -8,58 +8,47 @@
     <div class="row">
       <div class="col-md-2">Filter by</div>
       <div ng-app="type">
-        <div class="checkbox">
-          <input type="checkbox" ng-model="_showMens">Mens   
-          <input type="checkbox" ng-model="_showWomens">  Womens    
-          <input type="checkbox" ng-model="_showKids">  Kids   
+        <div>
+          <input type="checkbox"  (change)="changeBoxMens('mens')" [(ngModel)]="showMens">Mens
+          <input type="checkbox" (change)="changeBoxWomens('womens')" [(ngModel)]="showWomens"> Womens
+          <input type="checkbox" (change)="changeBoxKids('kids')" [(ngModel)]="showKids"> Kids
         </div>
-      </div>
-      <!-- <div  ng-controller="angularController as ctrl">
-        <div class="sidebar" layout-padding>
-          <div ng-repeat="bikes in filteredBikes">
-            <h3 class="sort">{{bike.category}}</h3>
-              <div ng-repeat="option in filter.options">
-                <input type="checkbox" ng-model="type.mens" ng-checked="type.mens">Mens
-                <input type="checkbox" ng-model="type.womens" ng-checked="type.womens"> Womens
-                <input type="checkbox" ng-model="type.kids" ng-checked="type.kids"> Kids
-              </div>
-          </div>
-    </div> -->
+      </div>        
 
-    <div class="table-responsive">
-      <table class="table table-hover" *ngIf="filteredBikes && filteredBikes.length">
-        <thead>
-          <tr>
-            <th>
-              <button class="btn btn-primary" (click)='toggleImage()'>
+        <div class="table-responsive">
+          <table class="table table-hover" *ngIf="filteredBikes && filteredBikes.length">
+            <thead>
+              <tr>
+                <th>
+                  <button class="btn btn-primary" (click)='toggleImage()'>
         {{showImage ?'Hide':'Show'}} Image
       </button>
-            </th>
-            <th>Bikes</th>
-            <th>Code</th>
-            <th>Available</th>
-            <th>Description</th>
-            <th>Category</th>
-            <th>Price</th>
-            <th>Star Rating</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor='let bike of filteredBikes '>
-            <!-- <tr ng-repeat="bike in filteredBikes | filter:filter"> -->
-            <td><img *ngIf='showImage' [src]='bike.imageUrl' [title]='bike.bikeName' [style.width.px]='imageWidth' [style.margin.px]='imageMargin'
-              />
-            </td>
-            <td>{{bike.bikeName}}</td>
-            <td>{{bike.bikeCode}}</td>
-            <td>{{bike.relaseDate}}</td>
-            <td>{{bike.description}}</td>
-            <td>{{bike.category}}</td>
-            <td>{{bike.price | currency:'EUR':true:'1.2-2'}}</td>
-            <td>{{bike.starRating}}</td>
-          </tr>
-        </tbody>
-      </table>
+                </th>
+                <th>Bikes</th>
+                <th>Code</th>
+                <th>Available</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Star Rating</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor='let bike of filteredBikes '>
+                <!-- <tr ng-repeat="bike in filteredBikes | filter:filter"> -->
+                <td><img *ngIf='showImage' [src]='bike.imageUrl' [title]='bike.bikeName' [style.width.px]='imageWidth' [style.margin.px]='imageMargin'
+                  />
+                </td>
+                <td>{{bike.bikeName}}</td>
+                <td>{{bike.bikeCode}}</td>
+                <td>{{bike.relaseDate}}</td>
+                <td>{{bike.description}}</td>
+                <td>{{bike.category}}</td>
+                <td>{{bike.price | currency:'EUR':true:'1.2-2'}}</td>
+                <td>{{bike.starRating}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
-  </div>
-</div>

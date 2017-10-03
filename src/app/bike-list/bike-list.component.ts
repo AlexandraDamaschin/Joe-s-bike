@@ -14,10 +14,10 @@ export class BikeListComponent implements OnInit {
     imageWidth: number = 50;
     imageMargin: number = 2;
 
-    _showImage: boolean = true;
-    _showMens: boolean = true;
-    _showWomens: boolean = true;
-    _showKids: boolean = true;
+    showImage: boolean = true;
+    _showMens: string;
+    _showWomens:string;
+    _showKids: string;
 
     filteredBikes: IBike[];
     bikes: IBike[] =
@@ -94,30 +94,38 @@ export class BikeListComponent implements OnInit {
         this.filteredBikes = this.bikes;
     }
 
-    get showMens(): boolean {
+    get showMens(): string {
         return this._showMens
     }
-    set showMens(value: boolean) {
+    set showMens(value: string) {
         this._showMens = value;
-        this.filter();
+        this.filteredBikes = this.filter(this._showMens);
     }
-    get showWomens(): boolean {
+    get showWomens(): string {
         return this._showWomens;
     }
-    set showWomens(value: boolean) {
+    set showWomens(value: string) {
         this._showWomens = value;
-        this.filter();
+        this.filteredBikes = this.filter(this._showWomens);
     }
-    get showKids(): boolean {
+    get showKids(): string {
         return this._showKids;
     }
-    set showKids(value: boolean) {
+    set showKids(value: string) {
         this._showKids = value;
-        this.filter();
+        this.filteredBikes = this.filter(this._showKids);
     }
     toggleImage(): void {
-
-        this._showImage = !this._showImage;
+        this.showImage = !this.showImage;
+    }
+    changeBoxMens(type: string):void{
+        this.filteredBikes= this.showMens ? this.filter(type): this.bikes;
+    }
+    changeBoxWomens(type: string):void{
+        this.filteredBikes= this.showWomens ? this.filter(type): this.bikes;
+    }
+    changeBoxKids(type: string):void{
+        this.filteredBikes= this.showKids ? this.filter(type): this.bikes;
     }
     // performFilter(type: string, flag: boolean) {
     //     if (type=='mens') {
@@ -132,19 +140,23 @@ export class BikeListComponent implements OnInit {
     //         });
     //     }
     // }
-    filter() {
-        this.filteredBikes = _.filter(this.filteredBikes, (bike: IBike) => {
-            if(this._showMens && bike.category.toLowerCase() != 'mens'){
-                return false;
-            }
-             if(this._showWomens && bike.category.toLowerCase() != 'womens'){
-                return false;
-            }
-            if(this._showKids && bike.category.toLowerCase() != 'kids'){
-                return false;
-            }
-            return true;
-    });
+    filter(filterBy:string):IBike[] {
+        // this.filteredBikes = _.filter(this.filteredBikes, (bike: IBike) => {
+        //     if(this._showMens && bike.category.toLowerCase() != 'mens'){
+        //         return false;
+        //     }
+        //      if(this._showWomens && bike.category.toLowerCase() != 'womens'){
+        //         return false;
+        //     }
+        //     if(this._showKids && bike.category.toLowerCase() != 'kids'){
+        //         return false;
+        //     }
+        //     return true;
+        // =======================================================================
+        return this.bikes.filter((bikes: IBike) =>
+        bikes.category.toLocaleLowerCase().indexOf(filterBy) != -1);
+
+    // });
 }
 
     // filterBikes(bike: string) {
