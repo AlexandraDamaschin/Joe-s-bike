@@ -9,9 +9,9 @@
       <div class="col-md-2">Filter by</div>
       <div ng-app="type">
         <div class="checkbox">
-          <input type="checkbox" ng-model="type('Mens')">Mens
-          <input type="checkbox" ng-model="type('Womens')">Womens
-          <input type="checkbox" ng-model="type('Kids')">Kids
+          <input type="checkbox" ng-model="_showMens">Mens   
+          <input type="checkbox" ng-model="_showWomens">  Womens    
+          <input type="checkbox" ng-model="_showKids">  Kids   
         </div>
       </div>
       <!-- <div  ng-controller="angularController as ctrl">
@@ -45,8 +45,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor='let bike of filteredBikes'>
-            <!-- <tr ng-repeat="bike in filteredBikes | filter:typeFilter"> -->
+          <tr *ngFor='let bike of filteredBikes '>
+            <!-- <tr ng-repeat="bike in filteredBikes | filter:filter"> -->
             <td><img *ngIf='showImage' [src]='bike.imageUrl' [title]='bike.bikeName' [style.width.px]='imageWidth' [style.margin.px]='imageMargin'
               />
             </td>

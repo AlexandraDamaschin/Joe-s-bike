@@ -91,7 +91,7 @@ export class BikeListComponent implements OnInit {
     ];
 
     constructor() {
-        this.filteredBikes = this.bikes = [];
+        this.filteredBikes = this.bikes;
     }
 
     get showMens(): boolean {
@@ -99,41 +99,66 @@ export class BikeListComponent implements OnInit {
     }
     set showMens(value: boolean) {
         this._showMens = value;
-        this.performFilter("mens", value);
+        this.filter();
     }
     get showWomens(): boolean {
         return this._showWomens;
     }
     set showWomens(value: boolean) {
         this._showWomens = value;
-        this.performFilter("womens", value);
+        this.filter();
     }
     get showKids(): boolean {
         return this._showKids;
     }
     set showKids(value: boolean) {
         this._showKids = value;
-        this.performFilter("kids", value);
+        this.filter();
     }
     toggleImage(): void {
 
         this._showImage = !this._showImage;
     }
-    performFilter(type: string, add: boolean) {
-        if (add) {
-            this.bikes.forEach((bike: IBike) => {
-                if (bike.category.toLowerCase() == type.toLowerCase())
-                    this.filteredBikes.push(bike);
-            });
-        }
-        else {
-            this.filteredBikes = _.filter(this.filteredBikes, (bike: IBike) => {
-                return bike.category.toLowerCase() != type.toLowerCase();
-            });
-        }
+    // performFilter(type: string, flag: boolean) {
+    //     if (type=='mens') {
+    //         this.bikes.forEach((bike: IBike) => {
+    //             if (bike.category.toLowerCase() == type.toLowerCase())
+    //                 this.filteredBikes.push(bike);
+    //         });
+    //     }
+    //     else {
+    //         this.filteredBikes = _.filter(this.filteredBikes, (bike: IBike) => {
+    //             return bike.category.toLowerCase() != type.toLowerCase();
+    //         });
+    //     }
+    // }
+    filter() {
+        this.filteredBikes = _.filter(this.filteredBikes, (bike: IBike) => {
+            if(this._showMens && bike.category.toLowerCase() != 'mens'){
+                return false;
+            }
+             if(this._showWomens && bike.category.toLowerCase() != 'womens'){
+                return false;
+            }
+            if(this._showKids && bike.category.toLowerCase() != 'kids'){
+                return false;
+            }
+            return true;
+    });
+}
 
-    }
+    // filterBikes(bike: string) {
+    //     if (bike.category == 'mens') {
+    //         return this._showMens;
+    //     }
+    //     else if (type =='womens') {
+    //         return this._showWomens;
+    //     }
+    //     else  ( type=='kids'){
+    //         return this._showKids;
+    //     }
+    // }
     ngOnInit(): void {
     }
 }
-  
+
