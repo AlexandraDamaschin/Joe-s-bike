@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+<<<<<<< HEAD
 import { IBike } from './bike';
+=======
+import { IBike } from '../bike';
+import * as _ from 'lodash';
+// import { $ } from 'protractor';
+// angular.module('bike', []);
+>>>>>>> a3b78f2... no more .json
 
 @Component({
     selector: 'app-bike-list',
@@ -10,12 +17,21 @@ export class BikeListComponent implements OnInit {
     pageTitle: string = "Joe`s Bikes";
     imageWidth: number = 50;
     imageMargin: number = 2;
+<<<<<<< HEAD
 
     showImage: boolean = true;
     _showMens: string;
     _showWomens:string;
     _showKids: string;
 
+=======
+
+    _showImage: boolean = true;
+    _showMens: boolean = true;
+    _showWomens: boolean = true;
+    _showKids: boolean = true;
+
+>>>>>>> a3b78f2... no more .json
     filteredBikes: IBike[];
     bikes: IBike[] =
     [
@@ -88,6 +104,7 @@ export class BikeListComponent implements OnInit {
     ];
 
     constructor() {
+<<<<<<< HEAD
         this.filteredBikes = this.bikes;
     }
 
@@ -132,3 +149,51 @@ export class BikeListComponent implements OnInit {
     }
 }
 
+=======
+        this.filteredBikes = this.bikes = [];
+    }
+
+    get showMens(): boolean {
+        return this._showMens
+    }
+    set showMens(value: boolean) {
+        this._showMens = value;
+        this.performFilter("mens", value);
+    }
+    get showWomens(): boolean {
+        return this._showWomens;
+    }
+    set showWomens(value: boolean) {
+        this._showWomens = value;
+        this.performFilter("womens", value);
+    }
+    get showKids(): boolean {
+        return this._showKids;
+    }
+    set showKids(value: boolean) {
+        this._showKids = value;
+        this.performFilter("kids", value);
+    }
+    toggleImage(): void {
+
+        this._showImage = !this._showImage;
+    }
+    performFilter(type: string, add: boolean) {
+        if (add) {
+            this.bikes.forEach((bike: IBike) => {
+                if (bike.category.toLowerCase() == type.toLowerCase())
+                    this.filteredBikes.push(bike);
+            });
+        }
+        else {
+            this.filteredBikes = _.filter(this.filteredBikes, (bike: IBike) => {
+                return bike.category.toLowerCase() != type.toLowerCase();
+            });
+        }
+
+    }
+    ngOnInit(): void {
+    }
+}
+  
+>>>>>>> a3b78f2... no more .json
