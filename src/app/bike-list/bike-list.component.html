@@ -47,7 +47,7 @@
                   <td>{{bike.description}}</td>
                   <td>{{bike.category}}</td>
                   <td>{{bike.price | currency:'EUR':true:'1.2-2'}}</td>
-                  <td>{{bike.starRating}}</td>
+                  <td><app-star-component [rating]='bike.starRating'></app-star-component></td>
                 </tr>
               </tbody>
             </table>

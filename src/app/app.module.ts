@@ -5,11 +5,13 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { BikeListComponent } from './bike-list/bike-list.component';
+import { StarComponent } from './shared/star-component/star-component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BikeListComponent,
+    StarComponent,
   ],
   imports: [
     BrowserModule,
