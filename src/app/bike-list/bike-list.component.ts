@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IBike } from '../bike';
-import * as _ from 'lodash';
-// import { $ } from 'protractor';
-// angular.module('bike', []);
+import { IBike } from './bike';
 
 @Component({
     selector: 'app-bike-list',
@@ -14,10 +11,10 @@ export class BikeListComponent implements OnInit {
     imageWidth: number = 50;
     imageMargin: number = 2;
 
-    _showImage: boolean = true;
-    _showMens: boolean = true;
-    _showWomens: boolean = true;
-    _showKids: boolean = true;
+    showImage: boolean = true;
+    _showMens: string;
+    _showWomens:string;
+    _showKids: string;
 
     filteredBikes: IBike[];
     bikes: IBike[] =
@@ -91,49 +88,47 @@ export class BikeListComponent implements OnInit {
     ];
 
     constructor() {
-        this.filteredBikes = this.bikes = [];
+        this.filteredBikes = this.bikes;
     }
 
-    get showMens(): boolean {
+    get showMens(): string {
         return this._showMens
     }
-    set showMens(value: boolean) {
+    set showMens(value: string) {
         this._showMens = value;
-        this.performFilter("mens", value);
+        this.filteredBikes = this.filter(this._showMens);
     }
-    get showWomens(): boolean {
+    get showWomens(): string {
         return this._showWomens;
     }
-    set showWomens(value: boolean) {
+    set showWomens(value: string) {
         this._showWomens = value;
-        this.performFilter("womens", value);
+        this.filteredBikes = this.filter(this._showWomens);
     }
-    get showKids(): boolean {
+    get showKids(): string {
         return this._showKids;
     }
-    set showKids(value: boolean) {
+    set showKids(value: string) {
         this._showKids = value;
-        this.performFilter("kids", value);
+        this.filteredBikes = this.filter(this._showKids);
     }
     toggleImage(): void {
-
-        this._showImage = !this._showImage;
+        this.showImage = !this.showImage;
     }
-    performFilter(type: string, add: boolean) {
-        if (add) {
-            this.bikes.forEach((bike: IBike) => {
-                if (bike.category.toLowerCase() == type.toLowerCase())
-                    this.filteredBikes.push(bike);
-            });
-        }
-        else {
-            this.filteredBikes = _.filter(this.filteredBikes, (bike: IBike) => {
-                return bike.category.toLowerCase() != type.toLowerCase();
-            });
-        }
-
+    changeBoxMens(type: string):void{
+        this.filteredBikes= this.showMens ? this.filter(type): this.bikes;
     }
+    changeBoxWomens(type: string):void{
+        this.filteredBikes= this.showWomens ? this.filter(type): this.bikes;
+    }
+    changeBoxKids(type: string):void{
+        this.filteredBikes= this.showKids ? this.filter(type): this.bikes;
+    }
+    filter(filterBy:string):IBike[] {
+        return this.bikes.filter((bikes: IBike) =>
+        bikes.category.toLocaleLowerCase().indexOf(filterBy) != -1);
+}
     ngOnInit(): void {
     }
 }
-  
+
